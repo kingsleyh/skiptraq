@@ -1,0 +1,65 @@
+html {
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-size: 18px;
+}
+
+.button-success, .button-error, .button-warning, .button-secondary {
+  color: white;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  height: 3em;
+  width: 10em;
+}
+
+.button-cancel {
+  color: #49274A;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  height: 3em;
+  width: 10em;
+}
+
+.button-cancel {
+  background: #F8EEE7;
+  /* this is a shell */
+}
+
+.button-success {
+  background: #94618E;
+  /* this is a grape */
+}
+
+.button-error {
+  background: rgb(202, 60, 60);
+  /* this is a maroon */
+}
+
+.button-warning {
+  background: rgb(223, 117, 20);
+  /* this is an orange */
+}
+
+.button-secondary {
+  background: #49274A;
+  /* this is a dark eggplant */
+}
+
+.button-xsmall {
+  font-size: 70%;
+}
+
+.button-small {
+  font-size: 85%;
+}
+
+.button-large {
+  font-size: 110%;
+}
+
+.button-xlarge {
+  font-size: 125%;
+}
+
+.in-center {
+  text-align: center;
+}
