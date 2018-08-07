@@ -3,6 +3,10 @@ html {
   font-size: 18px;
 }
 
+#calibrationCountdown .values{
+  font-size: 400%
+}
+
 .button-success, .button-error, .button-warning, .button-secondary {
   color: white;
   border-radius: 4px;

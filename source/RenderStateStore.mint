@@ -6,14 +6,14 @@ enum RenderState {
 }
 
 store RenderStateStore {
-  property renderState : RenderState = RenderState::Initial
+  state renderState : RenderState = RenderState::Initial
 
   fun setCurrentRenderState(currentState : RenderState) : Void {
-    next { state | renderState = currentState }
+    next { renderState = currentState }
   }
 
   fun getCurrentRenderState() : RenderState {
-    state.renderState
+    renderState
   }
 
 }
