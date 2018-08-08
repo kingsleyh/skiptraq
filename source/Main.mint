@@ -1,115 +1,48 @@
+record Ui.Pager.Item {
+  contents : Html,
+  name : String
+}
+
 component Main {
+  connect Application exposing { page, setPage }
 
- connect RenderStateStore exposing { setCurrentRenderState, getCurrentRenderState }
-
-  style topNav {
-    background: #94618E;
-    height: 3em;
-    text-align: center;
+  get pages : Array(Ui.Pager.Item) {
+    [
+      {
+        name = "home",
+        contents = <Home/>
+      },
+      {
+        name = "calibration",
+        contents = <Calibration/>
+      },
+      {
+        name = "calibration-run",
+        contents = <CalibrationRun/>
+      },
+      {
+        name = "calibration-feedback",
+        contents = <CalibrationFeedback/>
+      },
+      {
+        name = "not_found",
+        contents =
+          <div>
+            <{ "404" }>
+          </div>
+      }
+    ]
   }
-
-  style logo {
-    padding-top:0.6em;
-    color: #F8EEE7;
-    font-weight:bold;
-    font-size:23px;
-  }
-
-  style content {
-    padding-left:0.7em;
-    padding-right:0.7em;
-  }
-
-  get renderTopNav : Html {
-    <div class="pure-g">
-      <div::topNav class="pure-u-1-1">
-         <div::logo><{"SkipTraq"}></div>
-      </div>
-    </div>
-  }
-
-  fun switchState(s : RenderState) : Void {
-   do {
-    setCurrentRenderState(s)
-   }
-  }
-
-  get renderInitial : Html {
-    <div class="pure-g">
-      <div class="pure-u-1-1">
-         <p><{"Welcome to SkipTraq. Let's start with some calibration."}></p>
-         <br/>
-         <div class="in-center">
-         <button onClick={(e : Html.Event) : Void => { switchState(RenderState::Calibration1)}} class="button-secondary button-xlarge"><{"Calibrate"}></button>
-         </div>
-      </div>
-    </div>
-  }
-
-  get renderCalibration1 : Html {
-    <div class="pure-g">
-      <div class="pure-u-1-1">
-         <p><{"In this calibration you will do regular bounce for as long as you can. Press the stop button as soon as you feel you have reached your limit."}></p>
-         <br/>
-         <div class="in-center">
-         <button onClick={(e : Html.Event) : Void => { switchState(RenderState::Calibration2)}} class="button-secondary button-xlarge"><{"Start"}></button>
-         <br/>
-         <br/>
-         <button onClick={(e : Html.Event) : Void => { switchState(RenderState::Initial)}} class="button-cancel button-xlarge"><{"Cancel"}></button>
-         </div>
-      </div>
-    </div>
-  }
-
- get countDown : Void {
-   `(()=>{
-     var timer = new Timer();
-      timer.start({countdown: true, startValues: {seconds: 3}});
-      $('#calibrationCountdown .values').html(timer.getTimeValues().seconds.toString());
-      timer.addEventListener('secondsUpdated', function (e) {
-        $('#calibrationCountdown .values').html(timer.getTimeValues().seconds.toString());
-      });
-      timer.addEventListener('targetAchieved', function (e) {
-          $('#calibrationCountdown .values').html('KABOOM!!');
-      });
-     })()
-   `
- }
-
-  fun renderCalibration2 : Html {
-    <div class="pure-g">
-      <div class="pure-u-1-1">
-         <p><{"Begin regular bounce for as long as you can."}></p>
-         <br/>
-         <div class="in-center">
-         <div id="calibrationCountdown">
-            <div class="values"></div>
-        </div>
-         <br/>
-         <br/>
-         <button onClick={(e : Html.Event) : Void => {switchState(RenderState::CalibrationFeedback)}} class="button-secondary button-xlarge"><{"Done"}></button>
-         </div>
-      </div>
-    </div>
-  } where {
-    c = countDown
-  }
-
- fun dispatch(currentState : RenderState) : Html {
-   case (currentState) {
-     RenderState::Calibration1 => renderCalibration1
-     RenderState::Calibration2 => renderCalibration2()
-     /* RenderState::CalibrationFeedback => renderCalibrationFeedback */
-     => renderInitial
-   }
- }
 
   fun render : Html {
-    <div>
-      <{renderTopNav}>
-      <div::content>
-        <{dispatch(getCurrentRenderState())}>
-      </div>
-    </div>
+    <Layout>
+      <{ content }>
+    </Layout>
+  } where {
+    content =
+      pages
+      |> Array.find((item : Ui.Pager.Item) : Bool => {item.name == page})
+      |> Maybe.map((item : Ui.Pager.Item) : Html => {item.contents})
+      |> Maybe.withDefault(<div/>)
   }
 }
