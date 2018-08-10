@@ -14,4 +14,18 @@ store Repo {
   get getCalibrationElapsedSeconds : Result(Storage.Error, String) {
     Storage.Local.get("calibrationElapsedSeconds")
   }
+
+  fun putCalibrationEffort (n : Number) : Void {
+    do {
+      Storage.Local.set(
+        "calibrationEffort",
+        Number.toString(n))
+    } catch Storage.Error => error {
+      next { error = "Error could not store: calibrationEffort" }
+    }
+  }
+
+  get getCalibrationEffort : Result(Storage.Error, String) {
+    Storage.Local.get("calibrationEffort")
+  }
 }

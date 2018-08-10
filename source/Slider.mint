@@ -5,6 +5,31 @@ component Slider {
   property value : Number = 0
   property step : Number = 1
   property min : Number = 0
+  property effortScale : Function(Number, String) = (number : Number) : String => {
+   if(number <= 20){
+     "Too Easy"
+   } else {
+     if(number > 20 && number <= 40){
+       "Easy"
+     } else {
+       if(number > 40 && number <= 60){
+         "Ok"
+       } else {
+         if(number > 60 && number <= 80){
+           "Hard"
+         } else {
+           if(number > 80 && number < 100){
+             "Very Hard"
+           } else {
+             "Too Hard"
+           }
+         }
+       }
+     }
+   }
+  }
+
+
   state sliderPos : String = Number.toString(value)
 
   style rangeSlider {
@@ -118,6 +143,7 @@ component Slider {
 
   fun render : Html {
     <div::rangeSlider>
+    <div><{effortScale(Number.fromString(sliderPos) |> Maybe.withDefault(0))}></div>
       <input::sliderRange
         value={sliderPos}
         step={Number.toString(step)}

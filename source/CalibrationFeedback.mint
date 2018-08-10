@@ -1,7 +1,5 @@
 component CalibrationFeedback {
-  connect Repo exposing { putCalibrationElapsedSeconds }
-
-  state sliderPos : String = "0"
+  connect Repo exposing { putCalibrationEffort }
 
   get recordCalibrationTime : Void {
     do {
@@ -10,13 +8,10 @@ component CalibrationFeedback {
     }
   }
 
-  fun go(e : Html.Event) : Void {
-    do {
-      pos = Dom.getValue(e.target)
-      Debug.log(pos)
-      next { sliderPos = pos }
-    }
-
+  fun updateStoredEffort(n : Number) : Void {
+   do {
+     putCalibrationEffort(n)
+   }
   }
 
   fun render : Html {
@@ -28,9 +23,10 @@ component CalibrationFeedback {
 
         <br/>
 
-
         <div class="in-center">
-         <Slider/>
+        <h3><{"How hard did the skipping feel?"}></h3>
+         <Slider onChange={updateStoredEffort}/>
+
           <br/>
           <br/>
 
