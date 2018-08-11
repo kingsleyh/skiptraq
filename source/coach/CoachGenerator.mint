@@ -1,19 +1,31 @@
 record Workout {
-  name : String
-  desc : String
+  name : String,
+  desc : String,
   duration : Number
 }
 
 record Workouts {
-  name : String
+  name : String,
   workouts : Array(Workout)
+}
+
+record WorkoutResult {
+  workouts : Workout,
+  elapsed
+
 }
 
 module Routines {
 
   fun regularBounce(duration : Number) : Workout {
     { name = "Regular Bounce",
-      desc = "",
+      desc = "Perform regular bounce",
+      duration = duration }
+  }
+
+  fun rest(duration : Number) : Workout {
+    { name = "Rest",
+      desc = "Take a rest",
       duration = duration }
   }
 
@@ -21,7 +33,7 @@ module Routines {
 
 module CoachGenerator {
 
-  fun generate (days : Number) : Array(Workouts) {
+  fun generate (days : Number, workoutHistory : ) : Array(Workouts) {
     case (days) {
       1 => generate1()
       2 => generate2()
