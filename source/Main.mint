@@ -25,6 +25,14 @@ component Main {
         contents = <CalibrationFeedback/>
       },
       {
+        name = "coach",
+        contents = <Coach/>
+      },
+      {
+        name = "coach-new",
+        contents = <CoachNew/>
+      },
+      {
         name = "not_found",
         contents =
           <div>

@@ -17,6 +17,18 @@ routes {
     }
   }
 
+  /coach {
+    do {
+      Application.setPage("coach")
+    }
+  }
+
+  /coach/new {
+    do {
+      Application.setPage("coach-new")
+    }
+  }
+
   /home {
     do {
       Application.setPage("home")
