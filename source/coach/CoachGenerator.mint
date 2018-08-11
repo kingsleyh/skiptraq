@@ -10,9 +10,14 @@ record Workouts {
 }
 
 record WorkoutResult {
-  workouts : Workout,
-  elapsed
+  workout : Workout,
+  elapsedRest : Number
+}
 
+record WorkoutsResult {
+  name : String,
+  workouts : Array(WorkoutResult),
+  elapsedRest : Number
 }
 
 module Routines {
@@ -25,7 +30,7 @@ module Routines {
 
   fun rest(duration : Number) : Workout {
     { name = "Rest",
-      desc = "Take a rest",
+      desc = "Take a planned rest",
       duration = duration }
   }
 
@@ -33,44 +38,49 @@ module Routines {
 
 module CoachGenerator {
 
-  fun generate (days : Number, workoutHistory : ) : Array(Workouts) {
+  fun generate (days : Number, workoutHistory : Array(WorkoutsResult), calibrationResult : CalibrationResult) : Array(Workouts) {
     case (days) {
-      1 => generate1()
-      2 => generate2()
-      3 => generate3()
-      4 => generate4()
-      5 => generate5()
-      6 => generate6()
-      7 => generate7()
-      => generate3()
+      1 => generate1(workoutHistory, calibrationResult)
+      2 => generate2(workoutHistory, calibrationResult)
+      3 => generate3(workoutHistory, calibrationResult)
+      4 => generate4(workoutHistory, calibrationResult)
+      5 => generate5(workoutHistory, calibrationResult)
+      6 => generate6(workoutHistory, calibrationResult)
+      7 => generate7(workoutHistory, calibrationResult)
+      => generate3(workoutHistory, calibrationResult)
     }
   }
 
-  fun generate1 : Array(Workouts) {
+  fun generate1 (workoutHistory : Array(WorkoutsResult), calibrationResult : CalibrationResult) : Array(Workouts) {
+    if(Array.isEmpty(workoutHistory)){
+      []
+       /* if(calibrationResult.effortFeedback > ) */
+    } else {
+       []
+    }
+  }
+
+  fun generate2 (workoutHistory : Array(WorkoutsResult), calibrationResult : CalibrationResult) : Array(Workouts) {
     []
   }
 
-  fun generate2 : Array(Workouts) {
+  fun generate3 (workoutHistory : Array(WorkoutsResult), calibrationResult : CalibrationResult) : Array(Workouts) {
     []
   }
 
-  fun generate3 : Array(Workouts) {
+  fun generate4 (workoutHistory : Array(WorkoutsResult), calibrationResult : CalibrationResult) : Array(Workouts) {
     []
   }
 
-  fun generate4 : Array(Workouts) {
+  fun generate5 (workoutHistory : Array(WorkoutsResult), calibrationResult : CalibrationResult) : Array(Workouts) {
     []
   }
 
-  fun generate5 : Array(Workouts) {
+  fun generate6 (workoutHistory : Array(WorkoutsResult), calibrationResult : CalibrationResult) : Array(Workouts) {
     []
   }
 
-  fun generate6 : Array(Workouts) {
-    []
-  }
-
-  fun generate7 : Array(Workouts) {
+  fun generate7 (workoutHistory : Array(WorkoutsResult), calibrationResult : CalibrationResult) : Array(Workouts) {
     []
   }
 }
