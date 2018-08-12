@@ -4,9 +4,17 @@ record Workout {
   duration : Number
 }
 
-record Workouts {
-  name : String,
+record Round {
+  number : Number
   workouts : Array(Workout)
+}
+
+record Workouts {
+  level : Number,
+  subLevel : Number,
+  name : String,
+  desc : String,
+  rounds : Array(Round)
 }
 
 record WorkoutResult {
@@ -14,26 +22,15 @@ record WorkoutResult {
   elapsedRest : Number
 }
 
-record WorkoutsResult {
-  name : String,
-  workouts : Array(WorkoutResult),
-  elapsedRest : Number
+record RoundResult {
+  number : Number
+  workouts : Array(WorkoutResult)
 }
 
-module Routines {
-
-  fun regularBounce(duration : Number) : Workout {
-    { name = "Regular Bounce",
-      desc = "Perform regular bounce",
-      duration = duration }
-  }
-
-  fun rest(duration : Number) : Workout {
-    { name = "Rest",
-      desc = "Take a planned rest",
-      duration = duration }
-  }
-
+record WorkoutsResult {
+  name : String,
+  rounds : Array(RoundResult),
+  elapsedRest : Number
 }
 
 module CoachGenerator {
