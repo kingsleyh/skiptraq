@@ -8,12 +8,6 @@ component CoachNew {
     }
   }
 
-  fun updateStoredEffort (n : Number) : Void {
-    do {
-      putCalibrationEffort(n)
-    }
-  }
-
   fun render : Html {
     <div class="pure-g">
       <div class="pure-u-1-1 in-center">

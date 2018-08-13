@@ -5,13 +5,12 @@ record Workout {
 }
 
 record Round {
-  number : Number
+  number : Number,
   workouts : Array(Workout)
 }
 
 record Workouts {
-  level : Number,
-  subLevel : Number,
+  level : Level,
   name : String,
   desc : String,
   rounds : Array(Round)
@@ -23,14 +22,21 @@ record WorkoutResult {
 }
 
 record RoundResult {
-  number : Number
+  number : Number,
   workouts : Array(WorkoutResult)
 }
 
 record WorkoutsResult {
+  level : Level,
   name : String,
+  desc : String,
   rounds : Array(RoundResult),
   elapsedRest : Number
+}
+
+record Level {
+  level : Number,
+  subLevel : Number
 }
 
 module CoachGenerator {
@@ -48,10 +54,39 @@ module CoachGenerator {
     }
   }
 
+  fun estimateLevelFromCalibration(calibrationResult : CalibrationResult) : Level {
+    if(calibrationResult.elapsedSeconds >= 0 && calibrationResult.elapsedSeconds <= 60){
+       {level = 1, subLevel = 1}
+    } else {
+      if(calibrationResult.elapsedSeconds > 60 && calibrationResult.elapsedSeconds <= 120){
+        {level = 2, subLevel = 1}
+      } else {
+        if(calibrationResult.elapsedSeconds > 120 && calibrationResult.elapsedSeconds <= 180){
+          {level = 3, subLevel = 1}
+        } else {
+          if(calibrationResult.elapsedSeconds > 180 && calibrationResult.elapsedSeconds <= 240){
+            {level = 4, subLevel = 1}
+          } else {
+            if(calibrationResult.elapsedSeconds > 240 && calibrationResult.elapsedSeconds <= 300){
+              {level = 5, subLevel = 1}
+            } else {
+              {level = 5, subLevel = 1}
+            }
+          }
+        }
+      }
+    }
+  }
+
   fun generate1 (workoutHistory : Array(WorkoutsResult), calibrationResult : CalibrationResult) : Array(Workouts) {
     if(Array.isEmpty(workoutHistory)){
-      []
-       /* if(calibrationResult.effortFeedback > ) */
+      try {
+        level = estimateLevelFromCalibration(calibrationResult)
+        case (level.level) {
+          1 => Array.slice(0, 1, Level1Routines.level1())
+          => Array.slice(0, 1, Level1Routines.level1())
+        }
+      }
     } else {
        []
     }
