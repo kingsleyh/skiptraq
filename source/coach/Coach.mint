@@ -1,43 +1,94 @@
 component Coach {
-  connect Repo exposing { putCalibrationEffort }
+  connect Repo exposing { generalError, getPlannedWorkouts, plannedWorkouts }
 
+  /*
   get recordCalibrationTime : Void {
+     do {
+       Window.navigate("/calibration/feedback")
+     }
+   }
+  */
+
+  /*
+  fun updateStoredEffort(n : Number) : Void {
     do {
-      /* putCalibrationElapsedSeconds(counter) */
-      Window.navigate("/calibration/feedback")
+      putCalibrationEffort(n)
+    }
+   }
+  */
+
+  fun componentDidMount : Void {
+    do {
+      getPlannedWorkouts()
     }
   }
 
-  fun updateStoredEffort(n : Number) : Void {
-   do {
-     putCalibrationEffort(n)
-   }
+  fun renderWorkouts (workouts : Workouts) : Html {
+    <tr>
+      <td>
+        <{ "1" }>
+      </td>
+
+      <td>
+        <{ workouts.name }>
+      </td>
+
+      <td/>
+    </tr>
   }
 
   fun render : Html {
     <div class="pure-g">
       <div class="pure-u-1-1 in-center">
         <p>
-          <{ "Provide feedback about the Calibration" }>
+          <{ "Follow the plan below" }>
         </p>
 
-        <br/>
+        <div><{generalError}></div>
 
+        <table class="pure-table pure-table-bordered">
+          <thead>
+            <tr>
+              <th>
+                <{ "Day" }>
+              </th>
+
+              <th>
+                <{ "Workouts" }>
+              </th>
+
+              <th/>
+            </tr>
+          </thead>
+
+          <tbody>
+            <{
+              plannedWorkouts
+              |> Array.map(renderWorkouts)
+            }>
+          </tbody>
+        </table>
+
+        /* <br/> */
+
+        /*
         <div class="in-center">
-        <h3><{"How hard did the skipping feel?"}></h3>
-         <Slider onChange={updateStoredEffort}/>
+               <h3><{"How hard did the skipping feel?"}></h3>
+                <Slider onChange={updateStoredEffort}/>
 
-          <br/>
-          <br/>
+                 <br/>
+                 <br/>
 
-          <button
-            onClick={(e : Html.Event) : Void => { recordCalibrationTime }}
-            class="button-secondary button-xlarge">
+                 <button
+                   onClick={(e : Html.Event) : Void => { recordCalibrationTime }}
+                   class="button-secondary button-xlarge">
 
-            <{ "Done" }>
+                   <{ "Done" }>
 
-          </button>
-        </div>
+                 </button>
+        */
+
+        /* </div> */
       </div>
     </div>
   }
