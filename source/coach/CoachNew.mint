@@ -1,10 +1,14 @@
 component CoachNew {
-  connect Repo exposing { putCalibrationEffort }
+  connect Repo exposing { putPlannedWorkouts, calibrationResult }
 
   get generateCoachingWeek : Void {
     do {
-      /* putCalibrationElapsedSeconds(counter) */
-      Window.navigate("/calibration/coach")
+      result = calibrationResult
+      workouts = CoachGenerator.generate(1, [], result)
+      putPlannedWorkouts(workouts)
+      /* Window.navigate("/calibration/coach") */
+    } catch String => error {
+      void
     }
   }
 

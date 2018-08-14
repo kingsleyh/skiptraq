@@ -22,6 +22,25 @@ store Repo {
   }
 
   /* ------------- Low level ------------- */
+  fun putPlannedWorkouts (workouts : Array(Workouts)) : Void {
+    do {
+      json = Json.stringify(encode workouts)
+      Storage.Local.set("plannedWorkouts", json)
+    } catch Storage.Error => error {
+      next { error = "Error could not store: planned workouts" }
+    }
+  }
+
+  fun getPlannedWorkouts() : Result(Storage.Error, Array(Workouts)) {
+      try {
+      workouts = Storage.Local.get("plannedWorkouts")
+      json = Json.parse(workouts)
+             |> Maybe.toResult("could not retrieve planned workouts")
+
+      decode json as Array(Workouts)
+       }
+  }
+
   fun putCalibrationElapsedSeconds (n : Number) : Void {
     do {
       Storage.Local.set(
@@ -49,5 +68,5 @@ store Repo {
   get getCalibrationEffort : Result(Storage.Error, String) {
     Storage.Local.get("calibrationEffort")
   }
-  
+
 }
