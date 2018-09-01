@@ -1,22 +1,7 @@
 component Coach {
   connect Repo exposing { generalError, getPlannedWorkouts, plannedWorkouts }
 
-  /*
-  get recordCalibrationTime : Void {
-     do {
-       Window.navigate("/calibration/feedback")
-     }
-   }
-  */
-
-  /*
-  fun updateStoredEffort(n : Number) : Void {
-    do {
-      putCalibrationEffort(n)
-    }
-   }
-  */
-  fun performWorkout (id : String) : Void {
+  fun workoutDetail (id : String) : Void {
     do {
       Window.navigate("/coach/workout/" + id)
     }
@@ -40,7 +25,7 @@ component Coach {
 
       <td>
         <button
-          onClick={(e : Html.Event) : Void => { performWorkout(workouts.id) }}
+          onClick={(e : Html.Event) : Void => { workoutDetail(workouts.id) }}
           class="button-secondary button-small">
 
           <{ "Go" }>

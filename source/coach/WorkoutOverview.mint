@@ -2,7 +2,13 @@ component WorkoutOverview {
   property wid : String = ""
 
   style roundColour {
-     background-color: lightblue;
+    background-color: lightblue;
+  }
+
+ fun performWorkout (id : String) : Void {
+    do {
+      Window.navigate("/coach/run/" + id)
+    }
   }
 
   fun render : Html {
@@ -33,6 +39,16 @@ component WorkoutOverview {
 
       <p>
         <{ workout.desc }>
+      </p>
+
+      <p>
+        <button
+          onClick={(e : Html.Event) : Void => { performWorkout(workout.id) }}
+          class="button-secondary button-small">
+
+          <{ "Let's do this!" }>
+
+        </button>
       </p>
 
       <br/>
@@ -99,7 +115,12 @@ component WorkoutOverview {
         <{ workout.desc }>
       </td>
 
-      <td><{ workout.duration |> Number.toString() }></td>
+      <td>
+        <{
+          workout.duration
+          |> Number.toString()
+        }>
+      </td>
     </tr>
   }
 }
