@@ -1,15 +1,16 @@
 module Level1Routines {
 
-  fun level1() : Array(Workouts) {
+  fun level1 : Array(Workouts) {
     [theGreatPyramid(), oceanWave()]
   }
 
-  /* fun theSpanishPlane() : Workouts {
-    { level = 1,}
-  } */
+  fun allWorkouts : Array(Workouts) {
+    level1()
+  }
 
-  fun theGreatPyramid() : Workouts {
-    { level = {level = 1,
+  fun theGreatPyramid : Workouts {
+    { id = "the-great-pyramid",
+      level = {level = 1,
       subLevel = 1},
       name = "The Great Pyramid",
       desc = "This resembles the steady climb and descent of a pyramid",
@@ -46,8 +47,9 @@ module Level1Routines {
     }
   }
 
-  fun oceanWave() : Workouts {
-    { level = {level = 1,
+  fun oceanWave : Workouts {
+    { id = "ocean-wave",
+      level = {level = 1,
       subLevel = 1},
       name = "Ocean Wave",
       desc = "This workout resembles the rise and fall of ocean waves",

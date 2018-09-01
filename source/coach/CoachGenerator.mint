@@ -10,6 +10,7 @@ record Round {
 }
 
 record Workouts {
+  id : String,
   level : Level,
   name : String,
   desc : String,
@@ -27,6 +28,7 @@ record RoundResult {
 }
 
 record WorkoutsResult {
+  id : String,
   level : Level,
   name : String,
   desc : String,

@@ -29,6 +29,20 @@ routes {
     }
   }
 
+ /coach/workout/:workoutId (workoutId: String) {
+    do {
+      Application.setWorkoutId(workoutId)
+      Application.setPage("coach-workout-overview")
+    }
+  }
+
+  /coach/run/:workoutId (workoutId: String) {
+    do {
+      Application.setWorkoutId(workoutId)
+      Application.setPage("coach-run")
+    }
+  }
+
   /home {
     do {
       Application.setPage("home")

@@ -4,7 +4,7 @@ record Ui.Pager.Item {
 }
 
 component Main {
-  connect Application exposing { page, setPage }
+  connect Application exposing { page, setPage, workoutId }
 
   get pages : Array(Ui.Pager.Item) {
     [
@@ -33,6 +33,14 @@ component Main {
         contents = <CoachNew/>
       },
       {
+        name = "coach-workout-overview",
+        contents = <WorkoutOverview wid={workoutId}/>
+      },
+      {
+        name = "coach-run",
+        contents = <CoachRun wid={workoutId}/>
+      },
+      {
         name = "not_found",
         contents =
           <div>
@@ -49,8 +57,9 @@ component Main {
   } where {
     content =
       pages
-      |> Array.find((item : Ui.Pager.Item) : Bool => {item.name == page})
-      |> Maybe.map((item : Ui.Pager.Item) : Html => {item.contents})
+      |> Array.find(
+        (item : Ui.Pager.Item) : Bool => { item.name == page })
+      |> Maybe.map((item : Ui.Pager.Item) : Html => { item.contents })
       |> Maybe.withDefault(<div/>)
   }
 }

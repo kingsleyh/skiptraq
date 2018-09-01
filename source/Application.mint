@@ -1,5 +1,6 @@
 store Application {
   state page : String = ""
+  state workoutId : String = ""
 
   fun setPage (page : String) : Void {
     do {
@@ -8,5 +9,7 @@ store Application {
     }
   }
 
-
+  fun setWorkoutId (id : String) : Void {
+    next { workoutId = id }
+  }
 }

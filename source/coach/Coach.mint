@@ -16,6 +16,11 @@ component Coach {
     }
    }
   */
+  fun performWorkout (id : String) : Void {
+    do {
+      Window.navigate("/coach/workout/" + id)
+    }
+  }
 
   fun componentDidMount : Void {
     do {
@@ -33,7 +38,15 @@ component Coach {
         <{ workouts.name }>
       </td>
 
-      <td/>
+      <td>
+        <button
+          onClick={(e : Html.Event) : Void => { performWorkout(workouts.id) }}
+          class="button-secondary button-small">
+
+          <{ "Go" }>
+
+        </button>
+      </td>
     </tr>
   }
 
@@ -44,7 +57,9 @@ component Coach {
           <{ "Follow the plan below" }>
         </p>
 
-        <div><{generalError}></div>
+        <div>
+          <{ generalError }>
+        </div>
 
         <table class="pure-table pure-table-bordered">
           <thead>
@@ -69,26 +84,6 @@ component Coach {
           </tbody>
         </table>
 
-        /* <br/> */
-
-        /*
-        <div class="in-center">
-               <h3><{"How hard did the skipping feel?"}></h3>
-                <Slider onChange={updateStoredEffort}/>
-
-                 <br/>
-                 <br/>
-
-                 <button
-                   onClick={(e : Html.Event) : Void => { recordCalibrationTime }}
-                   class="button-secondary button-xlarge">
-
-                   <{ "Done" }>
-
-                 </button>
-        */
-
-        /* </div> */
       </div>
     </div>
   }

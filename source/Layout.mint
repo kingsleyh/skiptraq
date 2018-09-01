@@ -2,7 +2,7 @@ component Layout {
   property children : Array(Html) = []
 
   style topNav {
-    background: #94618E;
+    background: #94618e;
     height: 3em;
     text-align: center;
   }
